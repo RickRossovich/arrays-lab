@@ -117,9 +117,9 @@ const print = function(addressBookReference) {
     console.log(contact);
   });
 };
-//variable freshBook deletes at index position 1 within the class AddressBook
-// freshBook.deleteAt(1);
-// print(freshBook);
+variable freshBook deletes at index position 1 within the class AddressBook
+freshBook.deleteAt(1);
+print(freshBook);
 
 // extended chanllenge
 for (let contact of freshBook.contacts) {
