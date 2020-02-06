@@ -56,6 +56,12 @@ form {
   border-radius: 5px;
   padding: 10px;
 }
+ 
+/* contact card should have a position of relative, and the icon should have a fixed position. */
+/* position: absolute; */
+/* right: -20 */
+/* bottom: -20 */
+
 
 label {
     margin-left: 5px;

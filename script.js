@@ -138,7 +138,7 @@ freshBook.add(
 function display() {
   let section = document.querySelector(".contact-container");
   section.innerHTML = "";
-  // let counter = 0;
+  let counter = 0;
   for (let contact of freshBook.contacts) {
     let card = document.createElement("div");
     let name = document.createElement("p");
@@ -153,10 +153,17 @@ function display() {
     let relation = document.createElement("p");
     relation.innerText = `Relation: ${contact.relation}`;
     card.append(relation);
-    section.append(card);
     card.setAttribute("class", "contact-card");
+    let icon = document.createElement("i");
+    // //now set icon attributes.
+    icon.classList.add("fas", "fa-trash");
+    icon.setAttribute("index-number", `${counter}`);
+    card.append(icon);
+    counter++;
+    section.append(card)
   }
-  const form = document.querySelector("form");
+}
+const form = document.querySelector("form");
 form.addEventListener("submit", event => {
   event.preventDefault();
   // adding names. Start with a function
@@ -171,29 +178,15 @@ form.addEventListener("submit", event => {
   display();
 });
 
-for (let contact of freshBook.contacts) {
-  console.log(contact);
-  //create variables for divs & p's. Make them for name, email, phone, and relation
-  let card = document.createElement("div");
-  let name = document.createElement("p");
-  name.innerText = `Name: ${contact.name}`;
-  let email = document.createElement("p");
-  email.innerText = ` Email:  ${contact.email}`;
-  let phone = document.createElement("p");
-  phone.innerText = ` Phone:  ${contact.phone}`;
-  // let relation = document.createElement("p");
-  // relation.innerText = ` Relation: ${contact.relation}`;
-  // // //implement icon. First create it as a variable
-  // let icon = document.createElement("i");
-  // //now set icon attributes.
-  // icon.classList.add("fas", "fa-trash");
-  // icon.setAttribute("data-index-number", `${index}`);
-  // newEntry.append(name, email, phone, relation, icon);
-  // document.querySelector("#contact-list").append(newEntry);
-  // card.append(name, email, phone, relation);
-  // container.append(card);
-  // card.setAttribute("class", "card");
-}
-}
-
 display();
+let contactContainer = document.querySelector(".contact-container");
+contactContainer.addEventListener("click", deleteContact);
+
+function deleteContact(event) {
+  if(event.target.classList.contains("fa-trash")) {
+    const index = event.target.getAttribute("index-number");
+    console.log(index);
+    freshBook.deleteAt(index);
+    display();
+  }
+}
