@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-  <script src="script.js"></script>  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Maven+Pro&display=swap"
+      rel="stylesheet"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Address Book Lab</title>
+  </head>
+  <body>
+    <section class="overlay">
+      <form>
+        <h1>My Contacts</h1>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" />
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" />
+        <label for="phone">Phone</label>
+        <input type="text" name="phone" id="phone" />
+        <label for="relation">Relation</label>
+        <input type="text" name="relation" id="relation"/>
+        <button>Add</button>
+      </form>
+      <div class="contact-container"></div>
+    <script src="https://kit.fontawesome.com/c8de378ee6.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

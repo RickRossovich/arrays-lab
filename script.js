@@ -30,11 +30,11 @@ class AddressBook {
   //function that deletes array entry in address book. pulls from the index, and tells how many entries to remove.
   deleteAt(index) {
     //selects contact array, tells it to index, and tells it how many entries in the array to delete.
-    this.contacts.splice(index, 1);
+    return this.contacts.splice(index, 1);
   }
 
   getAtIndex(index) {
-    return this.contacts([index]);
+    this.contacts([index]);
   }
 
   findContactByName(name) {
@@ -70,15 +70,15 @@ class AddressBook {
       }
     }
   }
-//specifically for for(in) loop, you must use square bracket notation
+  //specifically for for(in) loop, you must use square bracket notation
   searchContacts(text) {
-      return this.contacts.filter(contact => {
-          for(let property in contact) {
-              if(contact[property].toLowerCase().includes(text.toLowerCase())) {
-                  return contact;
-              }
-          }
-      })
+    return this.contacts.filter(contact => {
+      for (let property in contact) {
+        if (contact[property].toLowerCase().includes(text.toLowerCase())) {
+          return contact;
+        }
+      }
+    });
   }
 }
 //create a new variable that contains the class AddressBook();
@@ -92,7 +92,7 @@ freshBook.add(
 );
 freshBook.add("Spoon Grayson", "dirk@kirk.com", "777.9311", "homie");
 //console.logs variable freshBook
-console.log(freshBook);
+// console.log(freshBook);
 // add = function (name,email,phone,relation) {
 //     this.contacts.push(new Contact(name,email,phone,relation))
 // }
@@ -111,24 +111,89 @@ freshBook.add(
 //function that references class AddressBook and creates an
 //arrow function that uses a forEach loop to index the contacts array
 //and sends console.log()
-const print = function(addressBookReference) {
-  //variable addressBookReference is being used to index contacts in the forEach loop.
-  addressBookReference.contacts.forEach(contact => {
-    console.log(contact);
-  });
-};
-variable freshBook deletes at index position 1 within the class AddressBook
-freshBook.deleteAt(1);
-print(freshBook);
+// const print = function(Reference) {
+//   //variable addressBookReference is being used to index contacts in the forEach loop.
+//   Reference.contacts.forEach(contact => {
+//     console.log(contact);
+//   });
+// };
+// print();
+// variable freshBook deletes at index position 1 within the class AddressBook
+// freshBook.deleteAt(1);
+// print(freshBook);
 
 // extended chanllenge
-for (let contact of freshBook.contacts) {
-  console.log(contact.toString());
-}
+// for (let contact of freshBook.contacts) {
+// console.log(contact.toString());
+// }
 
 // freshBook.getAtIndex.index(1);
 
-console.log(freshBook.findContactByName("Hugh Mumphries"));
-console.log(freshBook.findContactsByRelation("Derek Rose's shooting coach"));
-console.log(freshBook.findContactsByRelation("Derek Rose's shooting coach"));
-console.log(freshBook.searchContacts("Hugh"))
+// console.log(freshBook.add("Hugh Mumphries"));
+// console.log(freshBook.findContactsByRelation("Derek Rose's shooting coach"));
+// console.log(freshBook.findContactsByRelation("Derek Rose's shooting coach"));
+// console.log(freshBook.searchContacts("Hugh"));
+// console.log(freshBook.deleteAt(1));
+
+function display() {
+  let section = document.querySelector(".contact-container");
+  section.innerHTML = "";
+  // let counter = 0;
+  for (let contact of freshBook.contacts) {
+    let card = document.createElement("div");
+    let name = document.createElement("p");
+    name.innerText = `Name: ${contact.name}`;
+    card.append(name);
+    let email = document.createElement("p");
+    email.innerText = `Email: ${contact.email}`;
+    card.append(email);
+    let phone = document.createElement("p");
+    phone.innerText = `Phone: ${contact.phone}`;
+    card.append(phone);
+    let relation = document.createElement("p");
+    relation.innerText = `Relation: ${contact.relation}`;
+    card.append(relation);
+    section.append(card);
+    card.setAttribute("class", "contact-card");
+  }
+  const form = document.querySelector("form");
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  // adding names. Start with a function
+  const formData = new FormData(form);
+  freshBook.add(
+    formData.get("name"),
+    formData.get("email"),
+    formData.get("phone"),
+    formData.get("relation")
+  );
+  form.reset();
+  display();
+});
+
+for (let contact of freshBook.contacts) {
+  console.log(contact);
+  //create variables for divs & p's. Make them for name, email, phone, and relation
+  let card = document.createElement("div");
+  let name = document.createElement("p");
+  name.innerText = `Name: ${contact.name}`;
+  let email = document.createElement("p");
+  email.innerText = ` Email:  ${contact.email}`;
+  let phone = document.createElement("p");
+  phone.innerText = ` Phone:  ${contact.phone}`;
+  // let relation = document.createElement("p");
+  // relation.innerText = ` Relation: ${contact.relation}`;
+  // // //implement icon. First create it as a variable
+  // let icon = document.createElement("i");
+  // //now set icon attributes.
+  // icon.classList.add("fas", "fa-trash");
+  // icon.setAttribute("data-index-number", `${index}`);
+  // newEntry.append(name, email, phone, relation, icon);
+  // document.querySelector("#contact-list").append(newEntry);
+  // card.append(name, email, phone, relation);
+  // container.append(card);
+  // card.setAttribute("class", "card");
+}
+}
+
+display();
